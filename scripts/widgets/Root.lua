@@ -88,6 +88,11 @@ function Root:OnUpdate()
             return
         end
 
+        -- 无定时器的 buff(如棱镜"好事多蘑")不显示倒计时
+        if buff.duration == nil then
+            return
+        end
+
         local timePassed = GetTime() - buff.startedAt - self.TimeDifferenceManager.timeDiff
         local timeLeft = math.max(0, math.floor(buff.duration - timePassed))
         local minutes = math.floor(timeLeft / 60)

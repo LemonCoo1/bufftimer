@@ -1,6 +1,6 @@
 name = "BUFF计时器"
-version = "1.4.1"
-description = "version: " .. version .. "\n原版料理、调料buff计时,兼容部分棱镜和能力勋章料理及调料"
+version = "1.4.2"
+description = "version: " .. version .. "\n原版料理、调料buff计时,兼容棱镜(适配7.x新buff命名)和能力勋章料理及调料"
 author = "柠檬"
 forumthread = ""
 

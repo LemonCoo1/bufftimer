@@ -21,10 +21,19 @@ for k, v in pairs(TUNING.BT_BUFFS) do
             return
         end
 
-        local timeLeft = inst.components.timer:GetTimeLeft("buffover")
-
         local buff = shallowcopy(v)
         buff.startedAt = GetTime()
+
+        -- 优先读取 buff 自身定时器的实际剩余时长，兼容各 mod 的动态时长(叠加、自定义参数等)
+        -- 无定时器的 buff(如棱镜"好事多蘑")不显示倒计时
+        if inst.components.timer ~= nil then
+            local timeLeft = inst.components.timer:GetTimeLeft("buffover")
+
+            if timeLeft ~= nil and timeLeft > 0 then
+                buff.duration = timeLeft
+            end
+        end
+
         player_classified.components.buffmanager:AddBuff(buff)
     end
 

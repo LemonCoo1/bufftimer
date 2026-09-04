@@ -18,7 +18,7 @@ local BuffManager = Class(function (self, inst)
     else
         inst:DoTaskInTime(0, function (inst)
             if ThePlayer.player_classified == inst then
-                SendModRPCToServer(GetModRPC("BuffManager", "getBuffs"), inst)
+                SendModRPCToServer(GetModRPC("buffmanager", "getBuffs"), inst)
 
                 inst:ListenForEvent("buffsChanged", function ()
                     self:SetBuffsFromNet()
