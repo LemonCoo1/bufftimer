@@ -17,18 +17,28 @@ local MARGIN = 10  --10
 local FONT_SIZE = 30
 local FONT = NUMBERFONT
 
+-- 构建 buff 悬浮提示文案；timeText 传入时追加最新的剩余时间(棱镜叠层 buff 每帧刷新)
+local function BuildTooltip(buff, timeText)
+    local str = "\n\n" .. buff.title .. "\n" .. buff.desc
+
+    if buff.countLabel ~= nil and buff.count ~= nil and buff.count > 0 then
+        str = str .. "\n当前" .. buff.countLabel .. " +" .. buff.count
+    end
+
+    if timeText ~= nil then
+        str = str .. "\n剩余 " .. timeText
+    end
+
+    return str .. "\n\n(右键按住可拖动)"
+end
+
 -- 拖动偏移的本地持久化键名
 local DRAG_POS_SAVE_KEY = "bufftimer_pos"
 
 -- 获取第 i 个 buff 图标的默认锚定坐标(相对屏幕左下角，像素)
 local function GetItemBasePosition(i)
-    if i <= 10 then
-        return TUNING.BT_LEFT_OFFSET + i * (IMAGE_SIZE + MARGIN), TUNING.BT_TOP_OFFSET
-    end
-
-    local row = math.floor(i / 10)
-
-    return TUNING.BT_LEFT_OFFSET + (i - 10) * (IMAGE_SIZE + MARGIN), TUNING.BT_TOP_OFFSET + row * 80
+    -- 全部横向排列在同一行，不换行
+    return TUNING.BT_LEFT_OFFSET + i * (IMAGE_SIZE + MARGIN), TUNING.BT_TOP_OFFSET
 end
 
 
@@ -161,7 +171,7 @@ function Root:OnUpdate()
 
             buffWidget.image = buffWidget:AddChild(Image(Util:GetInventoryItemAtlas(imageTex), imageTex))
             buffWidget.image:SetSize(IMAGE_SIZE, IMAGE_SIZE)
-            buffWidget.image:SetTooltip("\n\n" .. buff.title .. "\n" .. buff.desc .. "\n\n(右键按住可拖动)")
+            buffWidget.image:SetTooltip(BuildTooltip(buff))
             buffWidget.timeLeft = buffWidget:AddChild(Text(FONT, FONT_SIZE))
             buffWidget.timeLeft:SetPosition(0, -IMAGE_SIZE)
             buffWidget.timeLeft:SetHAlign(ANCHOR_MIDDLE)
@@ -218,7 +228,14 @@ function Root:OnUpdate()
             seconds = "0" .. seconds
         end
 
-        buffWidget.timeLeft:SetString(minutes .. ":" .. seconds)
+        local timeText = minutes .. ":" .. seconds
+
+        buffWidget.timeLeft:SetString(timeText)
+
+        -- 棱镜叠层 buff：每帧刷新悬浮提示，保证"剩余时间"始终为最新值
+        if buff.countLabel ~= nil then
+            buffWidget.image:SetTooltip(BuildTooltip(buff, timeText))
+        end
     end)
 
     self.listUpdated = false

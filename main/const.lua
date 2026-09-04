@@ -74,6 +74,15 @@ TUNING.BT_BUFFS = {
         image = "spice_sugar",
         duration = TUNING.BUFF_WORKEFFECTIVENESS_DURATION},
 
+    -- 火荨麻毒素
+    firenettle_toxin = {
+        name = "firenettle_toxin",
+        title = "火荨麻毒素",
+        desc = "体温急速升高，且会不断胡言乱语",
+        image = "firenettles",
+        duration = seg_time * 2
+    },
+
     -- 土豆淀粉
     buff_medal_assuagehunger = {
         name = "buff_medal_assuagehunger",
@@ -145,6 +154,55 @@ TUNING.BT_BUFFS = {
         image = "spice_pomegranate",
         duration = total_day_time},
 
+    -- 能力勋章：羊角帽 蓄电(电羊)
+    buff_medal_electricattack = {
+        name = "buff_medal_electricattack",
+        title = "蓄电(电羊)",
+        desc = "攻击附带电击伤害",
+        image = "medal_goathat",
+        duration = day_time
+    },
+    -- 能力勋章：瓶装灵魂
+    buff_medal_freeblink = {
+        name = "buff_medal_freeblink",
+        title = "灵魂跳跃",
+        desc = "获得灵魂跳跃能力",
+        image = "bottled_soul",
+        duration = day_time
+    },
+    -- 能力勋章：瓶装月光(月光移植)
+    buff_medal_transplantable = {
+        name = "buff_medal_transplantable",
+        title = "月光BUFF",
+        desc = "获得月光移植能力",
+        image = "bottled_moonlight",
+        duration = night_time + dusk_time
+    },
+    -- 能力勋章：本源能量
+    buff_medal_origin_energy = {
+        name = "buff_medal_origin_energy",
+        title = "本源能量",
+        desc = "本源之力，施法时消耗",
+        image = "medal_origin_essence",
+        duration = total_day_time
+    },
+    -- 能力勋章：凋零蜂王浆酱(凋零吸血)
+    buff_medal_withered_health = {
+        name = "buff_medal_withered_health",
+        title = "凋零吸血",
+        desc = "攻击时吸取敌人生命",
+        image = "medal_withered_royaljelly",
+        duration = day_time
+    },
+    -- 能力勋章：群伤(暂未启用)
+    buff_medal_aoecombat = {
+        name = "buff_medal_aoecombat",
+        title = "群伤",
+        desc = "攻击附加范围伤害",
+        image = "spice_withered_royal_jelly",
+        duration = day_time
+    },
+
     -- 棱镜 7.x 版本起 buff 预制物统一以 buff_l_ 为前缀
     -- 药酒
     buff_l_strengthenhancer = {
@@ -195,12 +253,14 @@ TUNING.BT_BUFFS = {
         duration = seg_time * 24
     },
     -- 月饼/花儿粑
+    -- countLabel: 棱镜叠层 buff 的数值字段(位面防御实际加成，取最高吃过的那档: 月饼15/花儿粑5)
     buff_l_planardefense = {
         name = "buff_l_planardefense",
         title = "位面稳固",
         desc = "提升位面防御",
         image = "dish_l_mooncake",
-        duration = seg_time * 12
+        duration = seg_time * 12,
+        countLabel = "位面防御"
     },
     -- 月饼/花儿粑
     buff_l_lunarresist = {
@@ -211,12 +271,14 @@ TUNING.BT_BUFFS = {
         duration = seg_time * 12
     },
     -- 月酿/花儿酒
+    -- countLabel: 棱镜叠层 buff 的数值字段(位面攻击实际加成，取最高喝过的那档: 月酿25/花儿酒10)
     buff_l_planarattack = {
         name = "buff_l_planarattack",
         title = "位面激进",
         desc = "提升位面攻击",
         image = "dish_l_moonwine",
-        duration = seg_time * 12
+        duration = seg_time * 12,
+        countLabel = "位面攻击"
     },
     -- 月酿/花儿酒
     buff_l_dissipateshadow = {
@@ -259,10 +321,12 @@ TUNING.BT_BUFFS = {
         duration = seg_time * 12
     },
     -- 双菇烩蛋/菌鱼双鲜堡(无定时器，不显示倒计时)
+    -- countLabel: 棱镜叠层 buff 的层数(吃料理 +1 层，上限20)，随叠加实时刷新
     buff_l_effortluck = {
         name = "buff_l_effortluck",
         title = "好事多蘑",
         desc = "提升运气，吃料理可叠加层数",
-        image = "dish_l_mushedeggs"
+        image = "dish_l_mushedeggs",
+        countLabel = "运气层数"
     }
 }

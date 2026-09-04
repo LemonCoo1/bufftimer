@@ -34,6 +34,12 @@ for k, v in pairs(TUNING.BT_BUFFS) do
             end
         end
 
+        -- 棱镜叠层 buff(位面防御/位面攻击)：读取 buff 实体上实际生效的数值字段 _count_l
+        -- (服务端独占字段，随 buffs 表一并同步到客户端用于悬浮显示)
+        if v.countLabel ~= nil and inst._count_l ~= nil and inst._count_l > 0 then
+            buff.count = inst._count_l
+        end
+
         player_classified.components.buffmanager:AddBuff(buff)
     end
 
