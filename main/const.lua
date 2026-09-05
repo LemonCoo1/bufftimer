@@ -74,6 +74,29 @@ TUNING.BT_BUFFS = {
         image = "spice_sugar",
         duration = TUNING.BUFF_WORKEFFECTIVENESS_DURATION},
 
+    -- 棱镜 7.x 起会把原版调料buff重定向为 buff_l_ 前缀(见棱镜 postinit_legion 的 fixedbuffs 表)
+    -- 辣(辣椒粉)->buff_l_attack、蒜(蒜粉)->buff_l_defense、甜(甜粉)->buff_l_workup
+    buff_l_attack = {
+        name = "buff_l_attack",
+        title = "辣椒面",
+        desc = "提升攻击1.2倍",
+        image = "spice_chili",
+        duration = TUNING.BUFF_ATTACK_DURATION},
+    -- 蒜
+    buff_l_defense = {
+        name = "buff_l_defense",
+        title = "蒜粉",
+        desc = "减少1/3伤害",
+        image = "spice_garlic",
+        duration = TUNING.BUFF_PLAYERABSORPTION_DURATION},
+    -- 甜
+    buff_l_workup = {
+        name = "buff_l_workup",
+        title = "蜂蜜水晶",
+        desc = "砍树、挖矿效率变为2倍",
+        image = "spice_sugar",
+        duration = TUNING.BUFF_WORKEFFECTIVENESS_DURATION},
+
     -- 火荨麻毒素
     firenettle_toxin = {
         name = "firenettle_toxin",
@@ -328,5 +351,38 @@ TUNING.BT_BUFFS = {
         desc = "提升运气，吃料理可叠加层数",
         image = "dish_l_mushedeggs",
         countLabel = "运气层数"
+    }
+}
+
+-- 大厨沃利专属菜(体温/发光效果)
+-- 注意：这 3 个菜的效果不是游戏内的 buff 实体(无 debuff 组件)，无法通过 buff 挂接自动监听。
+-- 热龙椒沙拉/芦笋冷汤 靠食物自带体温机制 SetTemperatureInBelly 实现(见原版 edible.lua)，
+-- 发光浆果慕斯 靠生成发光实体 wormlight_light_greater 实现(见原版 preparedfoods_warly.lua)。
+-- 因此在 main/player.lua 中改为监听食物进食事件(oneaten)手动计时。
+-- duration 即实际生效时长：控温菜 5 分钟(TUNING.BUFF_FOOD_TEMP_DURATION)，慕斯发光 2 天(WORMLIGHT_DURATION * 4)。
+TUNING.BT_FOOD_EFFECTS = {
+    -- 热龙椒沙拉
+    dragonchilisalad = {
+        name = "dragonchilisalad",
+        title = "热龙椒沙拉",
+        desc = "体温高于世界温度40度，冬天不怕冷",
+        image = "dragonchilisalad",
+        duration = TUNING.BUFF_FOOD_TEMP_DURATION
+    },
+    -- 芦笋冷汤
+    gazpacho = {
+        name = "gazpacho",
+        title = "芦笋冷汤",
+        desc = "体温低于世界温度40度，夏天不怕热",
+        image = "gazpacho",
+        duration = TUNING.BUFF_FOOD_TEMP_DURATION
+    },
+    -- 发光浆果慕斯
+    glowberrymousse = {
+        name = "glowberrymousse",
+        title = "发光浆果慕斯",
+        desc = "获得持续发光效果(范围随时间逐渐减小)",
+        image = "glowberrymousse",
+        duration = TUNING.WORMLIGHT_DURATION * 4
     }
 }
