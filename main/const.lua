@@ -235,13 +235,14 @@ TUNING.BT_BUFFS = {
         image = "dish_medicinalliquor",
         duration = total_day_time
     },
-    -- 香蕉慕斯
+    -- 好胃口(香蕉慕斯/香蕉冻/香蕉汁等原版+棱镜香蕉料理都会附加；图标动态还原为最后吃的那道料理)
     buff_l_bestappetite = {
         name = "buff_l_bestappetite",
-        title = "香蕉慕斯",
-        desc = "获得开胃效果",
+        title = "好胃口",
+        desc = "能吃不喜欢的食物",
         image = "dish_bananamousse",
-        duration = total_day_time
+        duration = total_day_time,
+        lastEatenFoodImage = true
     },
     -- 果泥香煎鱼
     buff_l_oilflow = {
@@ -351,6 +352,169 @@ TUNING.BT_BUFFS = {
         desc = "提升运气，吃料理可叠加层数",
         image = "dish_l_mushedeggs",
         countLabel = "运气层数"
+    },
+
+    -- 香脆松子(CrispyNuts)料理buff (buff 实体均带 debuff/timer，自动监听显示倒计时)
+    -- 仅登记正向增益；负面 debuff(如"超级香甜粘玉米"扣血/无法进食)不纳入
+    -- 加速(中)(松子咖啡/冰咖啡)
+    nutsbuff_speed = {
+        name = "nutsbuff_speed",
+        title = "加速(中)",
+        desc = "移动速度提升20%",
+        image = "nuts_coffe",
+        duration = 4 * 60
+    },
+    -- 加速(大)(松子拿铁/莓果拿铁/黄油拿铁/香蕉拿铁等，动态时长以实际 buff 为准)
+    nutsbuff_speed2 = {
+        name = "nutsbuff_speed2",
+        title = "加速(大)",
+        desc = "移动速度提升50%",
+        image = "nuts_latte",
+        duration = 6 * 60
+    },
+    -- 加速(小)(咖啡粉调味后进食触发)
+    nutsbuff_speed3 = {
+        name = "nutsbuff_speed3",
+        title = "加速(小)",
+        desc = "移动速度提升10%",
+        image = "spice_tf_coffee_powder",
+        duration = 4 * 60
+    },
+    -- 松萝蛋糕卷
+    nutsbuff_work = {
+        name = "nutsbuff_work",
+        title = "松萝蛋糕卷",
+        desc = "砍树、挖矿、敲击效率提升(2倍)",
+        image = "nuts_pinecake",
+        duration = 4 * 60
+    },
+    -- 咖啡布丁
+    nutsbuff_strength = {
+        name = "nutsbuff_strength",
+        title = "咖啡布丁",
+        desc = "提升10%攻击力",
+        image = "nuts_pudding",
+        duration = 8 * 60
+    },
+    -- 香蕉拿铁
+    nutsbuff_banana = {
+        name = "nutsbuff_banana",
+        title = "香蕉拿铁",
+        desc = "猴子不会主动跟随/偷取物品",
+        image = "nuts_latte_banana",
+        duration = 8 * 60
+    },
+    -- 青饺
+    nutsbuff_moisture = {
+        name = "nutsbuff_moisture",
+        title = "青饺",
+        desc = "保持不会潮湿",
+        image = "nuts_dumpling",
+        duration = 6 * 60
+    },
+    -- 回精神(松间云雾/桂馥兰香奶茶/月饼)
+    nutsbuff_sanity = {
+        name = "nutsbuff_sanity",
+        title = "回精神",
+        desc = "每2秒回复1点精神",
+        image = "nuts_mistypine",
+        duration = 60
+    },
+    -- 在水里,在天上,在心中(中秋彩蛋料理，玉兔专属额外效果)
+    nutsbuff_yutu = {
+        name = "nutsbuff_yutu",
+        title = "在水里,在天上,在心中",
+        desc = "玉兔2分钟内精神不降低",
+        image = "nuts_mooncake",
+        duration = 2 * 60
+    },
+    -- 不断回响的时光
+    nuts_buff_echotime = {
+        name = "nuts_buff_echotime",
+        title = "不断回响的时光",
+        desc = "移动速度提升20%",
+        image = "nuts_echotime",
+        duration = 360
+    },
+    -- 于火光中映照出来
+    nuts_buff_flameborn = {
+        name = "nuts_buff_flameborn",
+        title = "于火光中映照出来",
+        desc = "提升睡眠抗性(拉姆额外免疫潮湿/冰冻)",
+        image = "nuts_flameborn",
+        duration = 480
+    },
+    -- 回忆里,在此处
+    nuts_buff_memorybound = {
+        name = "nuts_buff_memorybound",
+        title = "回忆里,在此处",
+        desc = "提升睡眠抗性(莱茵额外提升位面伤害)",
+        image = "nuts_memorybound",
+        duration = 480
+    },
+    -- 兔子血
+    nuts_buff_rabbit_blood = {
+        name = "nuts_buff_rabbit_blood",
+        title = "兔子血",
+        desc = "攻击力提升20%(加洛普攻击额外吸血)",
+        image = "nuts_rabbit_blood",
+        duration = 480
+    },
+    -- 蔷薇拿铁
+    nuts_buff_rosy_latte = {
+        name = "nuts_buff_rosy_latte",
+        title = "蔷薇拿铁",
+        desc = "移动速度提升20%",
+        image = "nuts_rosy_latte",
+        duration = 480
+    },
+    -- 蔷薇拿铁(回血)
+    nuts_buff_rosy_latte1 = {
+        name = "nuts_buff_rosy_latte1",
+        title = "蔷薇拿铁(回血)",
+        desc = "每1秒回复1点生命",
+        image = "nuts_rosy_latte",
+        duration = 30
+    },
+    -- 看见一弯银轮
+    nuts_buff_silver_crescent = {
+        name = "nuts_buff_silver_crescent",
+        title = "看见一弯银轮",
+        desc = "获得照料作物的效果",
+        image = "nuts_silver_crescent",
+        duration = 480
+    },
+    -- 松香脆肠卷
+    nuts_buff_pine_sausage_roll = {
+        name = "nuts_buff_pine_sausage_roll",
+        title = "松香脆肠卷",
+        desc = "所有生物仇恨度下降",
+        image = "nuts_pine_sausage_roll",
+        duration = 480
+    },
+    -- 开心果拿铁
+    nuts_buff_pistachio_latte = {
+        name = "nuts_buff_pistachio_latte",
+        title = "开心果拿铁",
+        desc = "移动速度提升20%",
+        image = "nuts_pistachio_latte",
+        duration = 480
+    },
+    -- 开心果拿铁(防御)
+    nuts_buff_pistachio_latte1 = {
+        name = "nuts_buff_pistachio_latte1",
+        title = "开心果拿铁(防御)",
+        desc = "受到的伤害减少1/3",
+        image = "nuts_pistachio_latte",
+        duration = 240
+    },
+    -- 咖啡粉(食趣联动调味："浓郁的料理"移速)
+    tf_buff_coffee_powder = {
+        name = "tf_buff_coffee_powder",
+        title = "咖啡粉",
+        desc = "移动速度提升10%",
+        image = "spice_tf_coffee_powder",
+        duration = 240
     }
 }
 
@@ -361,21 +525,62 @@ TUNING.BT_BUFFS = {
 -- 因此在 main/player.lua 中改为监听食物进食事件(oneaten)手动计时。
 -- duration 即实际生效时长：控温菜 5 分钟(TUNING.BUFF_FOOD_TEMP_DURATION)，慕斯发光 2 天(WORMLIGHT_DURATION * 4)。
 TUNING.BT_FOOD_EFFECTS = {
-    -- 热龙椒沙拉
+    -- 热龙椒沙拉(肚内体温，tempHot=true 升温)
     dragonchilisalad = {
         name = "dragonchilisalad",
         title = "热龙椒沙拉",
         desc = "体温高于世界温度40度，冬天不怕冷",
         image = "dragonchilisalad",
-        duration = TUNING.BUFF_FOOD_TEMP_DURATION
+        duration = TUNING.BUFF_FOOD_TEMP_DURATION,
+        tempDuration = TUNING.BUFF_FOOD_TEMP_DURATION,
+        tempHot = true
     },
-    -- 芦笋冷汤
+    -- 芦笋冷汤(肚内体温降温)
     gazpacho = {
         name = "gazpacho",
         title = "芦笋冷汤",
         desc = "体温低于世界温度40度，夏天不怕热",
         image = "gazpacho",
-        duration = TUNING.BUFF_FOOD_TEMP_DURATION
+        duration = TUNING.BUFF_FOOD_TEMP_DURATION,
+        tempDuration = TUNING.BUFF_FOOD_TEMP_DURATION,
+        tempHot = false
+    },
+    -- 绿豆汤(香脆松子，肚内体温降温12分钟)
+    mungbean_soup = {
+        name = "mungbean_soup",
+        title = "绿豆汤",
+        desc = "降低体温，防止过热",
+        image = "nuts_mungbean_soup",
+        duration = 12 * 60,
+        tempDuration = 12 * 60,
+        tempHot = false
+    },
+    -- 红薯糖水(香脆松子，肚内体温升温16分钟)
+    sweetpotato_soup = {
+        name = "sweetpotato_soup",
+        title = "红薯糖水",
+        desc = "保持温度不过冷",
+        image = "nuts_sweetpotato_soup",
+        duration = 16 * 60,
+        tempDuration = 16 * 60,
+        tempHot = true
+    },
+    -- 通用保温(肚内体温升温的兜底：能力勋章同款通用方式，覆盖任何未单独登记的热量食物/调料变体/其他mod料理；
+    -- 实际图标会动态替换为"最后吃的那道料理"图片)
+    bt_temp_warm = {
+        name = "bt_temp_warm",
+        title = "保温",
+        desc = "肚内热量提升，温暖效果",
+        image = "spice_chili",
+        isGenericTemp = true
+    },
+    -- 通用降温(肚内体温降温的兜底，图标同上动态替换为最后吃的料理)
+    bt_temp_cool = {
+        name = "bt_temp_cool",
+        title = "降温",
+        desc = "肚内温度降低，清凉效果",
+        image = "frogfishbowl",
+        isGenericTemp = true
     },
     -- 发光浆果慕斯
     glowberrymousse = {
